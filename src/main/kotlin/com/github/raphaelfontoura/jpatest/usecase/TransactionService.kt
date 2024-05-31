@@ -3,6 +3,7 @@ package com.github.raphaelfontoura.jpatest.usecase
 import com.github.raphaelfontoura.jpatest.api.request.TransactionInput
 import com.github.raphaelfontoura.jpatest.api.request.TransactionStatusInput
 import com.github.raphaelfontoura.jpatest.api.response.TransactionResponse
+import com.github.raphaelfontoura.jpatest.api.response.TransactionsBalanceReport
 import com.github.raphaelfontoura.jpatest.api.response.TransactionsReport
 import com.github.raphaelfontoura.jpatest.domain.StatusEnum
 import com.github.raphaelfontoura.jpatest.domain.Transaction
@@ -42,5 +43,10 @@ class TransactionService(
     fun getAll(): TransactionsReport {
         val transactions = transactionRepository.findAll()
         return TransactionsReport.of(transactions)
+    }
+
+    fun getAllByClient(clientId: UUID): TransactionsBalanceReport {
+        val allByClientId = transactionRepository.findAllByClientId(clientId)
+        return TransactionsBalanceReport.of(allByClientId)
     }
 }

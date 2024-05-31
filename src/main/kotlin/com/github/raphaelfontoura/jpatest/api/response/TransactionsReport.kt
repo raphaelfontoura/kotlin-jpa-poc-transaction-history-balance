@@ -9,17 +9,30 @@ import java.util.*
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class TransactionsReport(
+    val transactions: List<TransactionResponse> = emptyList()
+) {
+    companion object {
+        fun of(transactions: List<Transaction>): TransactionsReport {
+            return TransactionsReport(
+                transactions = transactions.map { TransactionResponse.of(it) }
+            )
+        }
+    }
+}
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
+data class TransactionsBalanceReport(
     val transactions: List<TransactionResponse> = emptyList(),
     val balance: BalanceResponse? = null
 ) {
     companion object {
-        fun of(transactions: List<Transaction>): TransactionsReport {
+        fun of(transactions: List<Transaction>): TransactionsBalanceReport {
             if (transactions.isNotEmpty())
-             return TransactionsReport(
+             return TransactionsBalanceReport(
                 transactions = transactions.map { TransactionResponse.of(it) },
                 balance = BalanceResponse.of(transactions.first().balance!!)
             )
-            return TransactionsReport()
+            return TransactionsBalanceReport()
         }
     }
 }

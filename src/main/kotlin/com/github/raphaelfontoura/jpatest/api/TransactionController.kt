@@ -3,6 +3,7 @@ package com.github.raphaelfontoura.jpatest.api
 import com.github.raphaelfontoura.jpatest.api.request.TransactionInput
 import com.github.raphaelfontoura.jpatest.api.request.TransactionStatusInput
 import com.github.raphaelfontoura.jpatest.api.response.TransactionResponse
+import com.github.raphaelfontoura.jpatest.api.response.TransactionsBalanceReport
 import com.github.raphaelfontoura.jpatest.api.response.TransactionsReport
 import com.github.raphaelfontoura.jpatest.usecase.TransactionService
 import org.springframework.http.ResponseEntity
@@ -32,8 +33,13 @@ class TransactionController(
         return ResponseEntity.ok(result)
     }
 
+    @GetMapping("client/{clientId}")
+    fun getAllTransactionsByClient(@PathVariable clientId: UUID): ResponseEntity<TransactionsBalanceReport> {
+        return ResponseEntity.ok(transactionService.getAllByClient(clientId))
+    }
+
     @GetMapping
-    fun getAllTransaction(): ResponseEntity<TransactionsReport> {
+    fun getAllTransactions(): ResponseEntity<TransactionsReport> {
         return ResponseEntity.ok(transactionService.getAll())
     }
 
