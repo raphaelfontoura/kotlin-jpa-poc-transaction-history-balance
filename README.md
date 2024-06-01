@@ -1,5 +1,7 @@
 ## POC para validação de orquestração de objetos com JPA e Kotlin
 
+![Build branch maind]([https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=main](https://github.com/raphaelfontoura/kotlin-jpa-poc-transaction-history-balance/blob/main/.github/workflows/build-workflow.yml/badge.svg?branch=main))
+
 ---
 ### Endpoints
 
